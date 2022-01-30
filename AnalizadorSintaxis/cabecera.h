@@ -1,3 +1,26 @@
+/**
+typedef struct Exp {
+  enum { integer_exp, string_exp, variable_exp,
+         binary_exp, unary_exp, call_exp,
+         projection_exp, record_exp } tag;
+  union { int                                      integerExp;
+          string                                   stringExp;
+          string                                   variableExp;
+          struct { string           operator;
+                   struct Exp*      left;
+                   struct Exp*      right; }       binaryExp;
+          struct { string           operator;
+                   struct Exp*      operand; }     unaryExp;
+          struct { string           name;
+                   struct Exp_list* arguments; }   callExp;
+          struct { struct Exp*  record;
+                   string       attribute; }       projectionExp;
+          struct rec { string       attribute;
+                       struct Exp*  value;
+                       struct rec*  next; }        recordExp;
+      } op;
+} ast;**/
+
 typedef enum{
     PalRes, //0
     ID, //1
@@ -38,3 +61,6 @@ NODO *CrearNodo(Token tok);
 int InsertarInicio(NODO **cabeza, Token tok);
 int InsertarFinal(NODO **cabeza,Token tok);
 void ImprimirLista(NODO *cabeza);
+struct node *sentencia_lee(struct node *cabeza, int state);
+struct node *sentencia(struct node *cabeza);
+struct node *checar_sintaxis(struct node *cabeza);
