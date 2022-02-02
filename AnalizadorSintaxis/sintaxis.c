@@ -22,9 +22,9 @@ void SintaxisLeer(NODO *cabeza, int paso){
                 break;
             case 3:/* ) -> Parentesis Cerrado*/
                 if( strcmp(cabeza->tok.lexema,")" ) == 0)
-                    SintaxisLeer(cabeza->siguiente, 4);
+                    printf("Sintaxis de Leer correcta\n");
                 else
-                    SintaxisLeer(cabeza->siguiente, paso);
+                    printf("Se esperaba cierre de llave en Leer\n");
                 break;
 
             default:
@@ -52,9 +52,9 @@ void SintaxisMostrar(NODO *cabeza, int paso){
                 break;
             case 3:/* ) -> Parentesis Cerrado*/
                 if( strcmp(cabeza->tok.lexema,")" ) == 0)
-                    SintaxisMostrar(cabeza->siguiente, 4);
+                    printf("Sintaxis de MOSTRAR correcta\n");
                 else
-                    SintaxisMostrar(cabeza->siguiente, paso);
+                    printf("Se esperaba cierre de llave en MOSTRAR\n");
                 break;
 
             default:
@@ -69,7 +69,7 @@ void SintaxisMostrar(NODO *cabeza, int paso){
 void SintaxisMientras(NODO *cabeza, int paso){
     if(cabeza != NULL) {
         switch(paso) {
-          case 1:/*si*/
+          case 1:/*Mientras*/
             if( strcmp(cabeza->tok.lexema, "Mientras") == 0 )
               SintaxisMientras(cabeza->siguiente, 2);
             break;
@@ -256,6 +256,10 @@ void identificarSintaxis(NODO *cabeza){
         }
         else if (strcmp(cabeza->tok.lexema, "MOSTRAR")){
             SintaxisMostrar(cabeza, 1);
+            identificarSintaxis(cabeza->siguiente);
+        }
+        else if (strcmp(cabeza->tok.lexema, "Leer")){
+            SintaxisLeer(cabeza, 1);
             identificarSintaxis(cabeza->siguiente);
         }
         else{
