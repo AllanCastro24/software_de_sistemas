@@ -9,3 +9,7 @@ MOSTRAR ( numero3 );
 Si ( numero1 : 3 ){
 	Mostrar ( numero1 );
 }
+
+Para ( numero3 : 1 ; numero3 < 3 ; numero3 ++) {
+	Mostrar ( numero1 );
+}
