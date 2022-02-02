@@ -61,6 +61,3 @@ NODO *CrearNodo(Token tok);
 int InsertarInicio(NODO **cabeza, Token tok);
 int InsertarFinal(NODO **cabeza,Token tok);
 void ImprimirLista(NODO *cabeza);
-struct node *sentencia_lee(struct node *cabeza, int state);
-struct node *sentencia(struct node *cabeza);
-struct node *checar_sintaxis(struct node *cabeza);
