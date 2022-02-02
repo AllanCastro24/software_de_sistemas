@@ -6,31 +6,64 @@
 #include "cabecera.h"
 
 void SintaxisLeer(NODO *cabeza, int paso){
+    if(cabeza != NULL)
+    {
+        switch(paso)
+        {
+            case 1:/*Leer*/
+                if( strcmp(cabeza->tok.lexema, "Leer") == 0 )
+                    SintaxisLeer(cabeza->siguiente, 2);
+                break;
+            case 2:/* ( -> Parentesis Abierto*/
+                if( strcmp(cabeza->tok.lexema,"(") == 0 )
+                    SintaxisLeer(cabeza->siguiente, 3);
+                else
+                    printf("Se esperaba apertura de paréntesis despues de Leer \n");
+                break;
+            case 3:/* ) -> Parentesis Cerrado*/
+                if( strcmp(cabeza->tok.lexema,")" ) == 0)
+                    SintaxisLeer(cabeza->siguiente, 4);
+                else
+                    SintaxisLeer(cabeza->siguiente, paso);
+                break;
 
+            default:
+                SintaxisLeer(cabeza->siguiente, paso);
+                break;
+            }
+        SintaxisLeer(cabeza->siguiente, 1);
+    }
 }
 
 void SintaxisMostrar(NODO *cabeza, int paso){
-    if(cabeza != NULL){
-        switch(paso){
-            case 1:/* Espera un: "Mostrar" */
-                if (strcmp(cabeza->tok.lexema, "MOSTRAR") == 0){
-                    SintaxisLeer(cabeza->siguiente, 2);
-                }
-                else{
-                    printf("No lo encontro");
-                }
+    if(cabeza != NULL)
+    {
+        switch(paso)
+        {
+            case 1:/*Mostrar*/
+                if( strcmp(cabeza->tok.lexema, "MOSTRAR") == 0 )
+                    SintaxisMostrar(cabeza->siguiente, 2);
                 break;
-            case 2:/* Espera un: "(" */
-                if (strcmp(cabeza->tok.lexema, "(") == 0){
-                    printf("Correcto 2");
-                    SintaxisLeer(cabeza->siguiente, 3);
-                    }
-                else{
-                    printf("No lo encontro");
-                }
+            case 2:/* ( -> Parentesis Abierto*/
+                if( strcmp(cabeza->tok.lexema,"(") == 0 )
+                    SintaxisMostrar(cabeza->siguiente, 3);
+                else
+                    printf("Se esperaba apertura de paréntesis despues de MOSTRAR \n");
                 break;
-        }
+            case 3:/* ) -> Parentesis Cerrado*/
+                if( strcmp(cabeza->tok.lexema,")" ) == 0)
+                    SintaxisMostrar(cabeza->siguiente, 4);
+                else
+                    SintaxisMostrar(cabeza->siguiente, paso);
+                break;
+
+            default:
+                SintaxisMostrar(cabeza->siguiente, paso);
+                break;
+            }
+        SintaxisMostrar(cabeza->siguiente, 1);
     }
+
 }
 
 void SintaxisMientras(NODO *cabeza, int paso){
@@ -75,7 +108,7 @@ void SintaxisMientras(NODO *cabeza, int paso){
             SintaxisMientras(cabeza->siguiente, paso);
             break;
         }
-    SintaxisMientras(cabeza->siguiente, 1);
+        SintaxisMientras(cabeza->siguiente, 1);
     }
 }
 

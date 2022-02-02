@@ -192,8 +192,8 @@ int main () {
             }
         }
 
-        //printf("-TOKENS CREADOS-\n\n");
-        //ImprimirLista(cabeza);
+        printf("-TOKENS CREADOS-\n\n");
+        ImprimirLista(cabeza);
 
         identificarSintaxis(cabeza);
 
