@@ -21,8 +21,9 @@ void SintaxisLeer(NODO *cabeza, int paso){
                     printf("Se esperaba apertura de paréntesis despues de Leer \n");
                 break;
             case 3:/* ) -> Parentesis Cerrado*/
-                if( strcmp(cabeza->tok.lexema,")" ) == 0)
+                if( strcmp(cabeza->tok.lexema,")" ) == 0){
                     printf("Sintaxis de Leer correcta\n");
+                    identificarSintaxis(cabeza);}
                 else
                     SintaxisLeer(cabeza->siguiente, paso);
                 break;
@@ -32,7 +33,7 @@ void SintaxisLeer(NODO *cabeza, int paso){
                 break;
             }
         //SintaxisLeer(cabeza->siguiente, 1);
-        identificarSintaxis(cabeza);
+        //identificarSintaxis(cabeza);
     }
 }
 
@@ -52,8 +53,9 @@ void SintaxisMostrar(NODO *cabeza, int paso){
                     printf("Se esperaba apertura de paréntesis despues de MOSTRAR \n");
                 break;
             case 3:/* ) -> Parentesis Cerrado*/
-                if( strcmp(cabeza->tok.lexema,")" ) == 0)
+                if( strcmp(cabeza->tok.lexema,")" ) == 0){
                     printf("Sintaxis de MOSTRAR correcta\n");
+                    identificarSintaxis(cabeza);}
                 else
                     SintaxisMostrar(cabeza->siguiente, paso);
                 break;
@@ -63,7 +65,7 @@ void SintaxisMostrar(NODO *cabeza, int paso){
                 break;
             }
         //SintaxisMostrar(cabeza->siguiente, 1);
-        identificarSintaxis(cabeza);
+        //identificarSintaxis(cabeza);
     }
 
 }
@@ -101,8 +103,9 @@ void SintaxisMientras(NODO *cabeza, int paso){
               SintaxisMientras(cabeza->siguiente, paso);
             break;
           case 6:/*sino*/
-            if(strcmp(cabeza->tok.lexema, "}") == 0)
+            if(strcmp(cabeza->tok.lexema, "}") == 0){
               printf("Sintaxis de Mientras correcta\n");
+              identificarSintaxis(cabeza);}
             else
               printf("Se esperaba cierre de llave en Mientras\n");
             break;
@@ -111,7 +114,7 @@ void SintaxisMientras(NODO *cabeza, int paso){
             break;
         }
         //SintaxisMientras(cabeza->siguiente, 1);
-        identificarSintaxis(cabeza);
+        //identificarSintaxis(cabeza);
     }
 }
 
@@ -141,8 +144,9 @@ void SintaxisPara(NODO *cabeza, int paso){
               printf("Se esperaba llave de apertura después de ) en sentencia Para \n");
             break;
           case 5:/*sino*/
-            if(strcmp(cabeza->tok.lexema, "}") == 0)
+            if(strcmp(cabeza->tok.lexema, "}") == 0){
               printf("Sintaxis de Para correcta \n");
+              identificarSintaxis(cabeza);}
             else
               SintaxisPara(cabeza->siguiente, paso);
             break;
@@ -151,7 +155,7 @@ void SintaxisPara(NODO *cabeza, int paso){
             break;
         }
     //SintaxisPara(cabeza->siguiente, 1);
-    identificarSintaxis(cabeza);
+    //identificarSintaxis(cabeza);
     }
 }
 
@@ -192,6 +196,7 @@ void SintaxisIf(NODO *cabeza, int paso){
               SintaxisIf(cabeza->siguiente,7);
             else
               printf("Sintaxis de Si correcta\n");
+              identificarSintaxis(cabeza);
             break;
           case 7:/*iniciosino*/
             if(strcmp(cabeza->tok.lexema, "{") == 0)
@@ -211,6 +216,7 @@ void SintaxisIf(NODO *cabeza, int paso){
               SintaxisIf(cabeza->siguiente, 10);
             else
               printf("Sintaxis Si-Sino correcta\n");
+              identificarSintaxis(cabeza);
             break;
           case 10:/*iniciosino*/
             if(strcmp(cabeza->tok.lexema, "{") == 0)
@@ -219,8 +225,9 @@ void SintaxisIf(NODO *cabeza, int paso){
               printf("Se esperaba una llave de apertura para la sentencia Encambio\n");
             break;
           case 11:/*finsino*/
-            if(strcmp(cabeza->tok.lexema, "}") == 0)
+            if(strcmp(cabeza->tok.lexema, "}") == 0){
               printf("Sintaxis Si-Sino-Encambio correcta\n");
+              identificarSintaxis(cabeza);}
             else
             //Intrucciones del boque flase
               SintaxisIf(cabeza->siguiente, paso);
@@ -230,7 +237,7 @@ void SintaxisIf(NODO *cabeza, int paso){
             break;
         }
     //SintaxisIf(cabeza->siguiente, 1);
-    identificarSintaxis(cabeza);
+    //identificarSintaxis(cabeza);
     }
 }
 
@@ -257,10 +264,11 @@ void SintaxisVariables(NODO *cabeza, int paso){
                 break;
 
             case 4:/* = -> ID*/
-                if( cabeza->tok.tipoToken == 2 || cabeza->tok.tipoToken == 9)
-                    SintaxisVariables(cabeza->siguiente, 4);
+                if( cabeza->tok.tipoToken == 2 || cabeza->tok.tipoToken == 9){
+                    printf("Sintaxis de variables correcta");
+                    identificarSintaxis(cabeza);}
                 else
-                    printf("Sintaxis incorrecta de variables \n");
+                    SintaxisVariables(cabeza->siguiente, paso);
                 break;
 
             default:
@@ -268,38 +276,38 @@ void SintaxisVariables(NODO *cabeza, int paso){
                 break;
             }
         //SintaxisVariables(cabeza->siguiente, 1);
-        identificarSintaxis(cabeza);
+        //identificarSintaxis(cabeza);
     }
 }
 
 void identificarSintaxis(NODO *cabeza){
 
     if(cabeza != NULL){
-        if(strcmp(cabeza->tok.lexema, "Para")){ //Para
+        if(strcmp(cabeza->tok.lexema, "Para")== 0){ //Para
             SintaxisPara(cabeza, 1);
         }
-        else if (strcmp(cabeza->tok.lexema, "Mientras")){
+        else if (strcmp(cabeza->tok.lexema, "Mientras")== 0){
             SintaxisMientras(cabeza, 1);
         }
-        else if (strcmp(cabeza->tok.lexema, "Si")){
+        else if (strcmp(cabeza->tok.lexema, "Si")== 0){
             SintaxisIf(cabeza, 1);
         }
-        else if (strcmp(cabeza->tok.lexema, "MOSTRAR")){
+        else if (strcmp(cabeza->tok.lexema, "MOSTRAR")== 0){
             SintaxisMostrar(cabeza, 1);
         }
-        else if (strcmp(cabeza->tok.lexema, "Leer")){
+        else if (strcmp(cabeza->tok.lexema, "Leer")== 0){
             SintaxisLeer(cabeza, 1);
         }
-        else if (strcmp(cabeza->tok.lexema, "Cad")){
+        else if (strcmp(cabeza->tok.lexema, "Cad")== 0){
             SintaxisVariables(cabeza, 1);
         }
-        else if (strcmp(cabeza->tok.lexema, "Ent")){
+        else if (strcmp(cabeza->tok.lexema, "Ent")== 0){
             SintaxisVariables(cabeza, 1);
         }
-        else if (strcmp(cabeza->tok.lexema, "Flot")){
+        else if (strcmp(cabeza->tok.lexema, "Flot")== 0){
             SintaxisVariables(cabeza, 1);
         }
-        else if (strcmp(cabeza->tok.lexema, "Car")){
+        else if (strcmp(cabeza->tok.lexema, "Car")== 0){
             SintaxisVariables(cabeza, 1);
         }
         else{
