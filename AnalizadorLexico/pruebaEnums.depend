@@ -15,16 +15,16 @@
 	<string.h>
 	"cabecera.h"
 
-1633518470 source:c:\users\acast\documents\escuela\software de sistemas\analizadorlexico\lista.c
+1633514870 source:c:\users\brandon\desktop\pgms\c\analizadorlexico\lista.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	<string.h>
 	"cabecera.h"
 
-1635186501 c:\users\acast\documents\escuela\software de sistemas\analizadorlexico\cabecera.h
+1637995037 c:\users\brandon\desktop\pgms\c\analizadorlexico\cabecera.h
 
-1635188831 source:c:\users\acast\documents\escuela\software de sistemas\analizadorlexico\main.c
+1637996929 source:c:\users\brandon\desktop\pgms\c\analizadorlexico\main.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -38,9 +38,9 @@
 	<string.h>
 	"cabecera.h"
 
-1635182901 c:\users\acast\documents\github\software_de_sistemas\analizadorlexico\cabecera.h
+1637995037 c:\users\acast\documents\github\software_de_sistemas\analizadorlexico\cabecera.h
 
-1642401791 source:c:\users\acast\documents\github\software_de_sistemas\analizadorlexico\main.c
+1643833260 source:c:\users\acast\documents\github\software_de_sistemas\analizadorlexico\main.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
