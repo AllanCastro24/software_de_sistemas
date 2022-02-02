@@ -41,6 +41,7 @@ void lexemaSimb(char car){
         case 40:
         case 41:
         case 34:
+        case 59:
             generarToken(8, lexema, 2);
             break;
         default:
@@ -54,6 +55,7 @@ void lexemaCad(FILE *arch, char car){
     char str1[2] = {car, '\0'};
     char lexema[100] = "";
     strcpy(lexema,str1);
+    int bandError = 0; //Variable bandera para identificar cadenas inválidas
 
     while((car = fgetc(arch)) != EOF){
         if(isascii(car) && car != '"'){
@@ -65,12 +67,17 @@ void lexemaCad(FILE *arch, char car){
             break;
         }
         else{
-            printf("Error: Cadena no admite %c como caracter valido", car);
-            exit(-1);
+            char str2[2] = {car, '\0'};
+            strcat(lexema, str2);
+            bandError = 1;
         }
     }
 
-    generarToken(9, lexema, 4);
+    if(bandError == 0){
+        generarToken(9, lexema, 4);
+    }else{
+        generarToken(10, lexema, 4);
+    }
 }
 
 /*Esta función genera un lexema de tipo número entero o decimal
@@ -114,39 +121,42 @@ void lexemaId(FILE *arch, char car){
     char str1[2] = {car, '\0'};
     char lexema[100] = "";
     strcpy(lexema,str1);
+    char simbolo = ' '; //Variable para crear tokens de simbolos
 
     while((car = fgetc(arch)) != EOF){
         if(isalnum(car)){
             char str2[2] = {car, '\0'};
             strcat(lexema, str2);
         }
-        else if(car == ' ' || car == ';'){
+        else if(car == ' '){
             break;
         }
         else{
-            printf("Error: Identificador no admite %c como caracter valido", car);
-            exit(-1);
+            simbolo = car;
+            break;
         }
     }
 
-    if(existePalRes(lexema) == 1){
-        generarToken(0, lexema, 4);
-    }else{
-        generarToken(1, lexema, 4);
-    }
+        if(existePalRes(lexema) == 1){
+            generarToken(0, lexema, 4);
+        }else{
+            generarToken(1, lexema, 4);
+        }
 
+        if(simbolo != ' '){
+            lexemaSimb(simbolo);
+        }
 }
 
 /*Esta función recibe un lexema(cadena) y devuelve 1 si dicho
     lexema existe dentro de las palabras reservadas y 0 si no existe*/
 int existePalRes(char lexema[]){
     int i=0, bandera=0;
-    for(i == 0; i < 4; i++){ //El valor límite de i dependerá del tamaño del arreglo palabReserv
+    for(i == 0; i < 12; i++){ //El valor límite de i dependerá del tamaño del arreglo palabReserv
         if(strcmp(lexema, palabReserv[i]) == 0){
             bandera = 1;
         }
     }
-
     return bandera;
 }
 
@@ -184,7 +194,7 @@ int main () {
         else if(car == '"'){//Si se presenta una comilla
             lexemaCad(arch, car);
         }
-        else if(isascii(car) && car != ' ' && car != ';' && car != 10 && car != 13 && car != 9){//Si es un símbolo
+        else if(isascii(car) && car != ' ' && car != 10 && car != 13 && car != 9){//Si es un símbolo
             lexemaSimb(car);
         }
     }
