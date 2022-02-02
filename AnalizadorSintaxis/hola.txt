@@ -1,7 +1,7 @@
 Ent numero1 = 14.;
 Ent numero2 = 1.3;
 Cad pruebas = "Marcianito";
-Ent numero3 = numero1 + numero2;
+Ent numero3 = numero1;
 Leer ( numero1 );
 
 Leer ( numero2 );

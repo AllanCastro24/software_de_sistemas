@@ -264,7 +264,7 @@ void SintaxisVariables(NODO *cabeza, int paso){
                 break;
 
             case 4:/* = -> ID*/
-                if( cabeza->tok.tipoToken == 2 || cabeza->tok.tipoToken == 9){
+                if( cabeza->tok.tipoToken == 2 || cabeza->tok.tipoToken == 9 || cabeza->tok.tipoToken == 1){
                     printf("Sintaxis de variables correcta \n");
                     identificarSintaxis(cabeza);}
                 else
