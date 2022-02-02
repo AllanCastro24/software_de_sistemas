@@ -237,6 +237,40 @@ void SintaxisIf(NODO *cabeza, int paso){
 }
 
 void SintaxisVariables(NODO *cabeza, int paso){
+    if(cabeza != NULL)
+    {
+        switch(paso)
+        {
+            case 1:/*Tipo de dato*/
+                if( cabeza->tok.tipoToken = 1)
+                    SintaxisVariables(cabeza->siguiente, 2);
+                break;
+            case 2:/*  -> Variable*/
+                if( cabeza->tok.tipoToken = 1)
+                    SintaxisMostrar(cabeza->siguiente, 3);
+                else
+                    printf("Se esperaba un ID despues \n");
+                break;
+            case 3:/* = -> Asignación*/
+                if( cabeza->tok.tipoToken = 6 )
+                    SintaxisMostrar(cabeza->siguiente, 4);
+                else
+                    printf("Se esperaba un operador de asignación\n");
+                break;
+
+            case 4:/* = -> ID*/
+                if( cabeza->tok.tipoToken = 6 )
+                    SintaxisMostrar(cabeza->siguiente, 4);
+                else
+                    printf("Se esperaba un operador de asignación\n");
+                break;
+
+            default:
+                SintaxisMostrar(cabeza->siguiente, paso);
+                break;
+            }
+        SintaxisMostrar(cabeza->siguiente, 1);
+    }
 }
 
 void identificarSintaxis(NODO *cabeza){
@@ -260,6 +294,22 @@ void identificarSintaxis(NODO *cabeza){
         }
         else if (strcmp(cabeza->tok.lexema, "Leer")){
             SintaxisLeer(cabeza, 1);
+            identificarSintaxis(cabeza->siguiente);
+        }
+        else if (strcmp(cabeza->tok.lexema, "Cad")){
+            SintaxisVariables(cabeza, 1);
+            identificarSintaxis(cabeza->siguiente);
+        }
+        else if (strcmp(cabeza->tok.lexema, "Ent")){
+            SintaxisVariables(cabeza, 1);
+            identificarSintaxis(cabeza->siguiente);
+        }
+        else if (strcmp(cabeza->tok.lexema, "Flot")){
+            SintaxisVariables(cabeza, 1);
+            identificarSintaxis(cabeza->siguiente);
+        }
+        else if (strcmp(cabeza->tok.lexema, "Car")){
+            SintaxisVariables(cabeza, 1);
             identificarSintaxis(cabeza->siguiente);
         }
         else{
