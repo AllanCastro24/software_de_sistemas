@@ -8,7 +8,7 @@ typedef enum{
     OPASIGN, //6
     OPLOG, //7
     ESPECIAL, //8
-    CAD, //8
+    CAD, //9
     DESCONOCIDO //10
 }TipoToken;
 

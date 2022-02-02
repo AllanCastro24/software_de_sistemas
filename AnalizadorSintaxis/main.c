@@ -192,51 +192,11 @@ int main () {
             }
         }
 
-        printf("-TOKENS CREADOS-\n\n");
-        ImprimirLista(cabeza);
+        //printf("-TOKENS CREADOS-\n\n");
+        //ImprimirLista(cabeza);
 
         //identificarSintaxis(cabeza);
-        if(cabeza != NULL){
-            if(strcmp(cabeza->tok.lexema, "Para")){ //Para
-                SintaxisPara(cabeza, 1);
-                identificarSintaxis(cabeza->siguiente);
-            }
-            else if (strcmp(cabeza->tok.lexema, "Mientras")){
-                SintaxisMientras(cabeza, 1);
-                identificarSintaxis(cabeza->siguiente);
-            }
-            else if (strcmp(cabeza->tok.lexema, "Si")){
-                SintaxisIf(cabeza, 1);
-                identificarSintaxis(cabeza->siguiente);
-            }
-            else if (strcmp(cabeza->tok.lexema, "MOSTRAR")){
-                SintaxisMostrar(cabeza, 1);
-                identificarSintaxis(cabeza->siguiente);
-            }
-            else if (strcmp(cabeza->tok.lexema, "Leer")){
-                SintaxisLeer(cabeza, 1);
-                identificarSintaxis(cabeza->siguiente);
-            }
-            else if (strcmp(cabeza->tok.lexema, "Cad")){
-                SintaxisVariables(cabeza, 1);
-                identificarSintaxis(cabeza->siguiente);
-            }
-            else if (strcmp(cabeza->tok.lexema, "Ent")){
-                SintaxisVariables(cabeza, 1);
-                identificarSintaxis(cabeza->siguiente);
-            }
-            else if (strcmp(cabeza->tok.lexema, "Flot")){
-                SintaxisVariables(cabeza, 1);
-                identificarSintaxis(cabeza->siguiente);
-            }
-            else if (strcmp(cabeza->tok.lexema, "Car")){
-                SintaxisVariables(cabeza, 1);
-                identificarSintaxis(cabeza->siguiente);
-            }
-            else{
-                identificarSintaxis(cabeza->siguiente);
-            }
-        }
+        SintaxisPara(cabeza,1);
     }
 
 
